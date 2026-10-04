@@ -1,0 +1,294 @@
+<title>Cairn Architecture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap">
+<style>
+/* Layout: one reading column; the diagram breaks wider and scrolls sideways on phones. */
+:root {
+  --bg: #F7F7F4;        /* paper */
+  --surface: #FFFFFF;
+  --group: #EEEFEA;
+  --fg: #1E1F1C;        /* ink */
+  --muted: #5E625A;
+  --line: #C6C9C0;
+  --enc: #2F6690;       /* topo water blue: encrypted journal data */
+  --blaze: #D9541A;     /* blaze orange: plain content the user chose to publish */
+  --serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --sans: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11161A; --surface: #182027; --group: #141B21; --fg: #E7E9E3; --muted: #9AA19A;
+    --line: #36404A; --enc: #74AEDB; --blaze: #FF7D42; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11161A; --surface: #182027; --group: #141B21; --fg: #E7E9E3; --muted: #9AA19A;
+  --line: #36404A; --enc: #74AEDB; --blaze: #FF7D42; color-scheme: dark;
+}
+body { background: var(--bg); color: var(--fg); font: 400 16px/1.6 var(--sans); }
+.wrap { max-width: 1120px; margin: 0 auto; padding-inline: 20px; padding-block: 40px 64px; display: grid; gap: 48px; }
+header { display: grid; gap: 12px; max-width: 68ch; }
+.eyebrow { font: 500 12px/1.4 var(--mono); color: var(--muted); letter-spacing: .04em; margin: 0; }
+h1 { font: 600 clamp(2rem, 4.5vw, 2.9rem)/1.1 var(--serif); margin: 0; text-wrap: balance; }
+h2 { font: 600 1.55rem/1.2 var(--serif); margin: 0 0 14px; text-wrap: balance; }
+.lead { font-size: 1.12rem; margin: 0; }
+.lead strong { font-weight: 600; }
+p { margin: 0; }
+figure { margin: 0; display: grid; gap: 16px; }
+.scroll { overflow-x: auto; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding-block: 12px; }
+.scroll svg { display: block; width: 100%; min-width: 940px; height: auto; color: var(--fg); }
+figcaption { color: var(--muted); max-width: 72ch; font-size: .95rem; }
+.legend { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 32px; font-size: .92rem; }
+.legend li { display: flex; align-items: center; gap: 10px; }
+.legend svg { flex: none; }
+
+/* Diagram */
+svg text { font-family: var(--sans); }
+.grp { fill: var(--group); stroke: var(--line); }
+.box { fill: var(--surface); stroke: var(--line); }
+.box-enc { fill: var(--surface); stroke: var(--enc); stroke-width: 1.5; }
+.box-share { fill: var(--surface); stroke: var(--blaze); stroke-width: 1.5; }
+.box-later { fill: var(--bg); stroke: var(--muted); stroke-dasharray: 4 3; }
+.chip { fill: var(--group); stroke: var(--line); }
+.chip-enc { fill: var(--group); stroke: var(--enc); stroke-width: 1.5; }
+.chip-later { fill: var(--group); stroke: var(--muted); stroke-dasharray: 4 3; }
+.t { font-size: 13px; font-weight: 600; fill: var(--fg); }
+.t2 { font-size: 12px; font-weight: 600; fill: var(--fg); }
+.s { font-size: 11px; fill: var(--muted); }
+.gh { font-size: 11px; font-weight: 700; letter-spacing: .1em; fill: var(--fg); }
+.gr { font-family: var(--mono); font-weight: 500; letter-spacing: 0; fill: var(--muted); }
+.lbl, .lbl-in { font-size: 11px; font-weight: 500; fill: var(--fg); paint-order: stroke; stroke-width: 4px; stroke-linejoin: round; }
+.lbl { stroke: var(--bg); }
+.lbl-in { stroke: var(--group); }
+.e-ink { fill: none; stroke: var(--fg); stroke-width: 1.25; }
+.e-enc { fill: none; stroke: var(--enc); stroke-width: 2.25; }
+.e-share { fill: none; stroke: var(--blaze); stroke-width: 2; stroke-dasharray: 6 4; }
+.m-ink { fill: var(--fg); }
+.m-enc { fill: var(--enc); }
+.m-share { fill: var(--blaze); }
+
+/* Tables */
+.table-scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: .95rem; }
+th, td { text-align: left; vertical-align: top; padding: 10px 14px 10px 0; border-bottom: 1px solid var(--line); }
+th { font: 600 11px/1.4 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+td:first-child { font-weight: 600; width: 28%; }
+code, .mono { font: 500 .88em var(--mono); }
+.yes { color: var(--blaze); font-weight: 600; }
+.no { color: var(--enc); font-weight: 600; }
+section { display: grid; gap: 4px; }
+ul.plain { margin: 0; padding-left: 1.1em; display: grid; gap: 8px; max-width: 75ch; }
+footer { color: var(--muted); font-size: .88rem; border-top: 1px solid var(--line); padding-top: 16px; }
+</style>
+
+<main class="wrap">
+  <header>
+    <p class="eyebrow">Cairn · product hub · v1 "Trail" architecture · Oct 2026</p>
+    <h1>Where your journal goes</h1>
+    <p class="lead">The journal lives on the phone. It leaves the phone <strong>only encrypted</strong>, or as <strong>a page you chose to share</strong>. Cairn's servers hold accounts and sync bookkeeping, never journal text.</p>
+  </header>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 1280 710" role="img" aria-label="Cairn architecture. On the phone, quick capture and the journal UI write notes, photos and location points to a local SQLite journal; weather and terrain elevation are looked up by the phone using only a rounded area; a sync engine encrypts changes and sends them to the storage the user chose: nowhere, Cairn Cloud's R2 bucket, or the user's own iCloud or Google Drive. The API and Postgres hold only account and sync metadata. Only a page the user shares leaves in plain form, through a shared-pages bucket to a link viewer.">
+        <defs>
+          <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path class="m-ink" d="M0,1 L9,5 L0,9 z"/></marker>
+          <marker id="ah-enc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path class="m-enc" d="M0,1 L9,5 L0,9 z"/></marker>
+          <marker id="ah-share" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path class="m-share" d="M0,1 L9,5 L0,9 z"/></marker>
+        </defs>
+
+        <!-- Groups -->
+        <rect class="grp" x="20" y="40" width="420" height="600" rx="10"/>
+        <text class="gh" x="44" y="64">PHONE <tspan class="gr" dx="6">cairn-app</tspan></text>
+        <text class="s" x="44" y="626">Works fully offline. Export to PDF + open archive at any time.</text>
+
+        <rect class="grp" x="520" y="40" width="360" height="600" rx="10"/>
+        <text class="gh" x="540" y="64">CAIRN CLOUD <tspan class="gr" dx="6">cairn-api</tspan></text>
+        <text class="s" x="540" y="626">Provisioned by <tspan class="gr">cairn-infra</tspan> (OpenTofu)</text>
+
+        <text class="gh" x="940" y="60">OUTSIDE SERVICES</text>
+
+        <!-- Phone -->
+        <rect class="box" x="44" y="90" width="178" height="84" rx="6"/>
+        <text class="t" x="58" y="116">Quick capture</text>
+        <text class="s" x="58" y="136">widget · Action button</text>
+        <text class="s" x="58" y="154">quick tile · watch (v1.5)</text>
+
+        <rect class="box" x="238" y="90" width="178" height="84" rx="6"/>
+        <text class="t" x="252" y="116">Journal UI</text>
+        <text class="s" x="252" y="136">Flutter · pages · pocket</text>
+        <text class="s" x="252" y="154">speech + sun/moon offline</text>
+
+        <rect class="box" x="44" y="224" width="372" height="64" rx="6"/>
+        <text class="t" x="58" y="250">Local journal</text>
+        <text class="s" x="58" y="270">SQLite · photos · location points · the copy of record</text>
+
+        <rect class="box" x="44" y="338" width="372" height="64" rx="6"/>
+        <text class="t" x="58" y="364">Sync engine</text>
+        <text class="s" x="58" y="384">change log → encrypted on the phone (XChaCha20-Poly1305)</text>
+
+        <rect class="box" x="44" y="452" width="372" height="150" rx="6"/>
+        <text class="t" x="58" y="476">Where it's kept <tspan class="s" font-weight="400">· your choice, switchable</tspan></text>
+
+        <rect class="chip" x="58" y="490" width="108" height="90" rx="5"/>
+        <text class="t2" x="68" y="514">This device</text>
+        <text class="s" x="68" y="534">nothing leaves</text>
+        <text class="s" x="68" y="552">the phone</text>
+
+        <rect class="chip-enc" x="176" y="490" width="108" height="90" rx="5"/>
+        <text class="t2" x="186" y="514">Cairn Cloud</text>
+        <text class="s" x="186" y="534">end-to-end</text>
+        <text class="s" x="186" y="552">encrypted</text>
+
+        <rect class="chip-later" x="294" y="490" width="108" height="90" rx="5"/>
+        <text class="t2" x="304" y="514">Own cloud</text>
+        <text class="s" x="304" y="534">iCloud / Drive</text>
+        <text class="s" x="304" y="552">coming in v1.5</text>
+
+        <!-- Phone internal edges -->
+        <path class="e-ink" d="M133,174 V222" marker-end="url(#ah)"/>
+        <text class="lbl-in" x="141" y="203">pocket items</text>
+        <path class="e-ink" d="M327,176 V222" marker-start="url(#ah)" marker-end="url(#ah)"/>
+        <text class="lbl-in" x="335" y="203">read / write</text>
+        <path class="e-ink" d="M230,288 V336" marker-end="url(#ah)"/>
+        <text class="lbl-in" x="238" y="317">changes</text>
+        <path class="e-enc" d="M230,402 V450" marker-end="url(#ah-enc)"/>
+        <text class="lbl-in" x="240" y="431">encrypted records + photos</text>
+
+        <!-- Cairn Cloud -->
+        <rect class="box" x="540" y="90" width="320" height="84" rx="6"/>
+        <text class="t" x="554" y="116">cairn-api</text>
+        <text class="s" x="554" y="136">FastAPI on Fly.io</text>
+        <text class="s" x="554" y="154">sign-in · sync cursors · upload URLs</text>
+
+        <rect class="box" x="540" y="224" width="320" height="64" rx="6"/>
+        <text class="t" x="554" y="250">Neon Postgres</text>
+        <text class="s" x="554" y="270">accounts · sync cursors · entitlements</text>
+        <path class="e-ink" d="M700,174 V222" marker-start="url(#ah)" marker-end="url(#ah)"/>
+        <text class="lbl-in" x="708" y="203">reads / writes</text>
+
+        <rect class="box-share" x="540" y="338" width="320" height="64" rx="6"/>
+        <text class="t" x="554" y="364">R2 · shared pages</text>
+        <text class="s" x="554" y="384">only pages you chose to share</text>
+
+        <rect class="box-enc" x="540" y="490" width="320" height="90" rx="6"/>
+        <text class="t" x="554" y="518">R2 · journal storage</text>
+        <text class="s" x="554" y="538">encrypted blobs</text>
+        <text class="s" x="554" y="556">Cairn stores them but can't read them</text>
+
+        <!-- Outside services -->
+        <rect class="box" x="940" y="74" width="300" height="48" rx="6"/>
+        <text class="t" x="954" y="95">Sign in with Apple / Google</text>
+        <text class="s" x="954" y="112">identity only</text>
+
+        <rect class="box" x="940" y="136" width="300" height="48" rx="6"/>
+        <text class="t" x="954" y="157">RevenueCat</text>
+        <text class="s" x="954" y="174">App Store + Google Play purchases</text>
+
+        <rect class="box" x="940" y="232" width="300" height="48" rx="6"/>
+        <text class="t" x="954" y="253">Open-Meteo</text>
+        <text class="s" x="954" y="270">weather, filled in when signal returns</text>
+
+        <rect class="box-share" x="940" y="346" width="300" height="48" rx="6"/>
+        <text class="t" x="954" y="367">Share link viewer</text>
+        <text class="s" x="954" y="384">cairn-web · later</text>
+
+        <rect class="box" x="940" y="430" width="300" height="48" rx="6"/>
+        <text class="t" x="954" y="451">Terrain tiles</text>
+        <text class="s" x="954" y="468">elevation, read on the phone</text>
+
+        <rect class="box-later" x="940" y="512" width="300" height="48" rx="6"/>
+        <text class="t" x="954" y="533">Later (v2)</text>
+        <text class="s" x="954" y="550">Lulu printing · 3D relief map tiles</text>
+
+        <rect class="box-enc" x="940" y="600" width="300" height="48" rx="6"/>
+        <text class="t" x="954" y="621">Your iCloud / Google Drive</text>
+        <text class="s" x="954" y="638">encrypted files · Cairn not involved</text>
+
+        <!-- Cross-boundary edges -->
+        <path class="e-ink" d="M416,124 H538" marker-end="url(#ah)"/>
+        <text class="lbl" x="478" y="116" text-anchor="middle">metadata only</text>
+
+        <path class="e-share" d="M416,160 H478 V370 H538" marker-end="url(#ah-share)"/>
+        <text class="lbl" x="470" y="318" text-anchor="end">shared page</text>
+
+        <path class="e-enc" d="M416,535 H538" marker-end="url(#ah-enc)"/>
+        <text class="lbl" x="478" y="526" text-anchor="middle">encrypted blobs</text>
+
+        <path class="e-enc" d="M348,580 V690 H1090 V650" marker-end="url(#ah-enc)"/>
+        <text class="lbl" x="720" y="682" text-anchor="middle">encrypted files · v1.5</text>
+
+        <path class="e-ink" d="M860,98 H938" marker-end="url(#ah)"/>
+        <text class="lbl" x="900" y="90" text-anchor="middle">verifies</text>
+
+        <path class="e-ink" d="M940,160 H862" marker-end="url(#ah)"/>
+        <text class="lbl" x="900" y="152" text-anchor="middle">entitlements</text>
+
+        <path class="e-ink" d="M370,88 V20 H1256 V256 H1242" marker-end="url(#ah)"/>
+        <path class="e-ink" d="M1256,256 V454 H1242" marker-end="url(#ah)"/>
+        <text class="lbl" x="808" y="14" text-anchor="middle">rounded area + elevation · no account</text>
+
+        <path class="e-share" d="M860,370 H938" marker-end="url(#ah-share)"/>
+        <text class="lbl" x="900" y="362" text-anchor="middle">public link</text>
+      </svg>
+    </div>
+    <figcaption>Journal content is encrypted on the phone before it goes anywhere. It reaches Cairn's R2 bucket or your own cloud as blobs Cairn cannot read. The API only coordinates sign-in, sync position and upload URLs. The single path that carries readable content is the orange one: a page you decided to share.</figcaption>
+    <ul class="legend" aria-label="Legend">
+      <li><svg width="40" height="10" aria-hidden="true"><line x1="0" y1="5" x2="40" y2="5" stroke="var(--enc)" stroke-width="2.5"/></svg>Journal content, encrypted on the phone</li>
+      <li><svg width="40" height="10" aria-hidden="true"><line x1="0" y1="5" x2="40" y2="5" stroke="var(--blaze)" stroke-width="2" stroke-dasharray="6 4"/></svg>Readable content you chose to publish</li>
+      <li><svg width="40" height="10" aria-hidden="true"><line x1="0" y1="5" x2="40" y2="5" stroke="var(--fg)" stroke-width="1.25"/></svg>Metadata and service calls, no journal text</li>
+    </ul>
+  </figure>
+
+  <section>
+    <h2>What crosses each boundary</h2>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Data</th><th>Path</th><th>Can Cairn read it?</th></tr></thead>
+        <tbody>
+          <tr><td>Pages, pocket items, photos</td><td>Phone → R2 journal storage, or your own iCloud / Google Drive</td><td><span class="no">No.</span> Encrypted on the phone; the key never leaves your devices.</td></tr>
+          <tr><td>Location points</td><td>Saved on the phone each time you open Cairn or capture something; synced like pages</td><td><span class="no">No.</span> They are journal content, encrypted with everything else, and removed from shared pages.</td></tr>
+          <tr><td>Account and sync metadata</td><td>Phone → cairn-api → Postgres</td><td>Yes: account id, device ids, sync cursors, blob ids and sizes. No journal text, titles or places.</td></tr>
+          <tr><td>A page you share</td><td>Phone → R2 shared pages → link viewer</td><td><span class="yes">Yes.</span> You published it. Exact campsites are hidden by default.</td></tr>
+          <tr><td>Weather lookup</td><td>Phone → Open-Meteo, directly</td><td>Cairn never sees it. Open-Meteo gets a location rounded to about 1 km, the elevation and a date, with no account attached.</td></tr>
+          <tr><td>Elevation lookup</td><td>Phone → terrain tiles, directly</td><td>Cairn never sees it. The tile server learns only which ~10 km tile was downloaded; the exact elevation is read on the phone.</td></tr>
+          <tr><td>Purchases</td><td>App Store / Google Play → RevenueCat → cairn-api</td><td>Only which plan you have.</td></tr>
+          <tr><td>Sign-in</td><td>Apple / Google → cairn-api</td><td>Only a verified identity token.</td></tr>
+          <tr><td>Printing (v2)</td><td>Phone → cairn-api → Lulu</td><td><span class="yes">Yes</span>, for the notebook you order, only to print it.</td></tr>
+          <tr><td>Export</td><td>Phone → your files</td><td>Never touches Cairn.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Which repo owns what</h2>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Repo</th><th>Owns</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">cairn-app</td><td>Everything in the Phone box: the Flutter app, the local database, the sync engine and encryption, the Swift and Kotlin extensions, and the API client generated from a pinned spec.</td></tr>
+          <tr><td class="mono">cairn-api</td><td>The API service, the Postgres schema and migrations, signing R2 upload URLs, the RevenueCat webhook, share and print endpoints.</td></tr>
+          <tr><td class="mono">cairn-infra</td><td>The existence of the Cairn Cloud boxes: Fly.io apps, the Neon project, R2 buckets, DNS and secrets, for staging and prod.</td></tr>
+          <tr><td class="mono">cairn</td><td>The product hub: the sync and encryption format spec (what is inside the blobs), decision records, and this diagram.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Decisions this diagram records</h2>
+    <ul class="plain">
+      <li><strong>The phone is the source of truth.</strong> Every storage option is a copy of the local journal, so the app works the same with no account and no signal.</li>
+      <li><strong>Blobs bypass the API.</strong> The phone uploads straight to R2 with short-lived signed URLs, so the API never handles journal bytes, encrypted or not.</li>
+      <li><strong>One writer per page.</strong> Even on shared trips each person owns their own pages, so sync resolves conflicts with "last write wins" per record and needs no merge logic.</li>
+      <li><strong>Location points are journal content.</strong> Cairn saves one location fix each time you open the app or capture something, never continuously. You choose Always (so the Action button and widget work while the phone is locked), While using, or Off. Points are encrypted like pages, shown in the margin as they are saved, and can be deleted or paused. With location off, the journal still works and those points are simply missing.</li>
+      <li><strong>Weather and elevation are looked up by the phone.</strong> Open-Meteo gets a rounded location plus the exact elevation, and terrain tiles are read on the phone, so a hiker's exact position never reaches Cairn's servers or anyone else's.</li>
+      <li><strong>Own-cloud storage skips Cairn.</strong> With iCloud or Google Drive, encrypted files go from the phone to the user's account and Cairn's servers are not in the path.</li>
+    </ul>
+  </section>
+
+  <footer>Source: <span class="mono">design/architecture.html</span> in the <span class="mono">cairn</span> repo. A Mermaid version lives in <span class="mono">ARCHITECTURE.md</span>.</footer>
+</main>
