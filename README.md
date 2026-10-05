@@ -27,10 +27,21 @@ organization and have their own CI pipelines.
 
 | Repo | Contents |
 |---|---|
-| [cairn](https://github.com/Cairn-Outdoors-Journal/cairn) | This product hub |
+| [cairn-product-hub](https://github.com/Cairn-Outdoors-Journal/cairn-product-hub) | This product hub |
 | [cairn-app](https://github.com/Cairn-Outdoors-Journal/cairn-app) | Flutter app for iOS and Android, with Swift and Kotlin extensions |
 | [cairn-api](https://github.com/Cairn-Outdoors-Journal/cairn-api) | Python FastAPI service, Postgres migrations |
 | [cairn-infra](https://github.com/Cairn-Outdoors-Journal/cairn-infra) | OpenTofu for Fly.io, Neon, Cloudflare R2 and DNS |
+
+## Local setup
+
+Clone all four repos side by side in one `cairn/` folder:
+
+```sh
+mkdir cairn && cd cairn
+for r in cairn-product-hub cairn-app cairn-api cairn-infra; do
+  git clone git@github.com:Cairn-Outdoors-Journal/$r.git
+done
+```
 
 ## How the repos stay in step
 

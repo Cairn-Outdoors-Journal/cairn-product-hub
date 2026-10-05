@@ -74,7 +74,7 @@ content the user chose to publish. Thin (`-->`) = metadata and service calls, no
 | `cairn-app` | Everything in the Phone box: the Flutter app, the local database, the sync engine and encryption, the Swift and Kotlin extensions, and the API client generated from a pinned spec. |
 | `cairn-api` | The API service, the Postgres schema and migrations, signing R2 upload URLs, the RevenueCat webhook, share and print endpoints. |
 | `cairn-infra` | The Cairn Cloud resources themselves: Fly.io apps, the Neon project, R2 buckets, DNS and secrets, for staging and prod. |
-| `cairn` (this repo) | The product hub: the sync and encryption format spec (what is inside the blobs), decision records, and this document. |
+| `cairn-product-hub` (this repo) | The product hub: the sync and encryption format spec (what is inside the blobs), decision records, and this document. |
 
 ## Decisions this diagram records
 

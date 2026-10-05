@@ -2,6 +2,8 @@
 
 - **Status:** Accepted
 - **Date:** 2026-10-05
+- **Note:** the hub repo was renamed from `cairn` to `cairn-product-hub` on 2026-10-05, and local
+  clones live together in one `cairn/` folder.
 
 ## Context
 
@@ -20,7 +22,7 @@ Use four repositories in the `Cairn-Outdoors-Journal` GitHub organization, all p
 
 | Repo | Owns | Pipeline |
 |---|---|---|
-| `cairn` | Product hub: concept, roadmap, architecture, ADRs, specs, design sources | Markdown lint |
+| `cairn-product-hub` | Product hub: concept, roadmap, architecture, ADRs, specs, design sources | Markdown lint |
 | `cairn-app` | Flutter app plus Swift and Kotlin extensions | analyze + test on PR; tag → TestFlight and Play internal testing |
 | `cairn-api` | FastAPI service and SQL migrations | test + lint on PR; merge → staging; tag → prod; each release publishes `openapi.json` |
 | `cairn-infra` | OpenTofu for Fly.io, Neon, R2, DNS | plan on PR; apply on merge; prod apply needs manual approval |
