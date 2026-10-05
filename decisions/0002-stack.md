@@ -1,6 +1,6 @@
 # 0002. Technology stack
 
-- **Status:** Accepted; Fly.io management amended by [ADR 0006](0006-scaffolding-choices.md)
+- **Status:** Accepted; Fly.io management amended by [ADR 0006](0006-scaffolding-choices.md); OpenTofu replaced by Terraform in [ADR 0007](0007-terraform.md)
 - **Date:** 2026-10-05
 
 ## Context

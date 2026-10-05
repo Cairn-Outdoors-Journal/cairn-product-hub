@@ -30,7 +30,7 @@ organization and have their own CI pipelines.
 | [cairn-product-hub](https://github.com/Cairn-Outdoors-Journal/cairn-product-hub) | This product hub |
 | [cairn-app](https://github.com/Cairn-Outdoors-Journal/cairn-app) | Flutter app for iOS and Android, with Swift and Kotlin extensions |
 | [cairn-api](https://github.com/Cairn-Outdoors-Journal/cairn-api) | Python FastAPI service, Postgres migrations |
-| [cairn-infra](https://github.com/Cairn-Outdoors-Journal/cairn-infra) | OpenTofu for Fly.io, Neon, Cloudflare R2 and DNS |
+| [cairn-infra](https://github.com/Cairn-Outdoors-Journal/cairn-infra) | Terraform for Neon and Cloudflare R2 (DNS later); a flyctl script for Fly.io |
 
 ## Local setup
 

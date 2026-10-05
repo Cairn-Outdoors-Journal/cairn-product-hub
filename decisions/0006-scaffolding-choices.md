@@ -1,6 +1,6 @@
 # 0006. Scaffolding choices
 
-- **Status:** Accepted (amends [ADR 0002](0002-stack.md) for Fly.io)
+- **Status:** Accepted (amends [ADR 0002](0002-stack.md) for Fly.io); OpenTofu replaced by Terraform in [ADR 0007](0007-terraform.md)
 - **Date:** 2026-10-05
 
 ## Context

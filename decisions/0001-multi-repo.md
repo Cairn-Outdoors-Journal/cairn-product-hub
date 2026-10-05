@@ -1,6 +1,6 @@
 # 0001. Separate repositories with independent pipelines
 
-- **Status:** Accepted
+- **Status:** Accepted; infrastructure tool changed to Terraform by [ADR 0007](0007-terraform.md)
 - **Date:** 2026-10-05
 - **Note:** the hub repo was renamed from `cairn` to `cairn-product-hub` on 2026-10-05, and local
   clones live together in one `cairn/` folder.
