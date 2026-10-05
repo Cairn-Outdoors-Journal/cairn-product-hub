@@ -1,6 +1,6 @@
 # 0002. Technology stack
 
-- **Status:** Accepted
+- **Status:** Accepted; Fly.io management amended by [ADR 0006](0006-scaffolding-choices.md)
 - **Date:** 2026-10-05
 
 ## Context
