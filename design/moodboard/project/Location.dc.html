@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Location points setup</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;family=Schibsted+Grotesk:wght@400;500;600&amp;family=Martian+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#1C1D1A}a:hover{color:#B8430F}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; overflow: hidden; padding: 26px 24px 22px; background: #F7F7F4; color: #1C1D1A; font-family: 'Schibsted Grotesk', 'Helvetica Neue', Arial, sans-serif; display: flex; flex-direction: column; gap: 16px">
+
+  <div style="font-family: 'Martian Mono', monospace; font-size: 9.5px; color: #5E615A">SETTING UP · 3 OF 4</div>
+
+  <div style="display: flex; flex-direction: column; gap: 10px">
+    <h1 style="margin: 0; font-family: 'Newsreader', Georgia, serif; font-size: 32px; font-weight: 500; line-height: 1.1">Where you were</h1>
+    <p style="margin: 0; font-family: 'Newsreader', Georgia, serif; font-size: 16px; line-height: 1.45">Each time you open Cairn or capture something, it can save one location point. Points give each day a dotted route, an elevation, and the weather for where you actually were.</p>
+  </div>
+
+  <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 9px; font-size: 13.5px; line-height: 1.4">
+    <li style="display: grid; grid-template-columns: 16px minmax(0, 1fr); gap: 10px; align-items: start"><svg viewBox="0 0 24 24" aria-hidden="true" style="width: 14px; height: 14px; margin-top: 2px; fill: none; stroke: #8A6A45; stroke-width: 2; stroke-linejoin: round"><path d="M12 4L20 18H4Z"></path><circle cx="12" cy="13.3" r="1.8" style="fill: #8A6A45; stroke: none"></circle></svg><span>One point when you open Cairn or capture something. Never continuous tracking.</span></li>
+    <li style="display: grid; grid-template-columns: 16px minmax(0, 1fr); gap: 10px; align-items: start"><svg viewBox="0 0 24 24" aria-hidden="true" style="width: 14px; height: 14px; margin-top: 2px; fill: none; stroke: #8A6A45; stroke-width: 2; stroke-linejoin: round"><path d="M12 4L20 18H4Z"></path><circle cx="12" cy="13.3" r="1.8" style="fill: #8A6A45; stroke: none"></circle></svg><span>Kept in your journal, encrypted. Never sold or shared.</span></li>
+    <li style="display: grid; grid-template-columns: 16px minmax(0, 1fr); gap: 10px; align-items: start"><svg viewBox="0 0 24 24" aria-hidden="true" style="width: 14px; height: 14px; margin-top: 2px; fill: none; stroke: #8A6A45; stroke-width: 2; stroke-linejoin: round"><path d="M12 4L20 18H4Z"></path><circle cx="12" cy="13.3" r="1.8" style="fill: #8A6A45; stroke: none"></circle></svg><span>Delete any point, or pause for a day, from the page margin.</span></li>
+  </ul>
+
+  <div style="display: flex; align-items: center; gap: 8px; padding-top: 2px; font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #8A6A45">Allow location<span style="flex: 1; height: 1px; background: #D9DAD3"></span></div>
+
+  <div style="display: flex; flex-direction: column; gap: 8px">
+    <sc-for list="{{options}}" as="item" hint-placeholder-count="3">
+      <sc-if value="{{item.selected}}" hint-placeholder-val="{{false}}">
+        <button type="button" aria-pressed="true" onClick="{{item.pick}}" style="width: 100%; box-sizing: border-box; display: grid; grid-template-columns: 18px minmax(0, 1fr); gap: 10px; padding: 12px 14px; border: 1.5px solid #1C1D1A; border-radius: 6px; background: #FFFFFF; text-align: left; color: #1C1D1A; cursor: pointer">
+          <span aria-hidden="true" style="width: 16px; height: 16px; margin-top: 2px; box-sizing: border-box; border: 1.5px solid #1C1D1A; border-radius: 50%; display: flex; align-items: center; justify-content: center"><span style="width: 8px; height: 8px; border-radius: 50%; background: #E2531B"></span></span>
+          <span style="display: flex; flex-direction: column; gap: 3px">
+            <span style="font-family: 'Schibsted Grotesk', sans-serif; font-size: 15px; font-weight: 600">{{item.title}}</span>
+            <span style="font-family: 'Newsreader', Georgia, serif; font-size: 14px; line-height: 1.4; color: #3E403B">{{item.body}}</span>
+          </span>
+        </button>
+      </sc-if>
+      <sc-if value="{{item.unselected}}" hint-placeholder-val="{{true}}">
+        <button type="button" aria-pressed="false" onClick="{{item.pick}}" style="width: 100%; box-sizing: border-box; display: grid; grid-template-columns: 18px minmax(0, 1fr); gap: 10px; padding: 12px 14px; border: 1px solid #C9CBC3; border-radius: 6px; background: transparent; text-align: left; color: #1C1D1A; cursor: pointer">
+          <span aria-hidden="true" style="width: 16px; height: 16px; margin-top: 2px; box-sizing: border-box; border: 1.5px solid #8C8F87; border-radius: 50%"></span>
+          <span style="display: flex; flex-direction: column; gap: 3px">
+            <span style="font-family: 'Schibsted Grotesk', sans-serif; font-size: 15px; font-weight: 600">{{item.title}}</span>
+            <span style="font-family: 'Newsreader', Georgia, serif; font-size: 14px; line-height: 1.4; color: #3E403B">{{item.body}}</span>
+          </span>
+        </button>
+      </sc-if>
+    </sc-for>
+  </div>
+
+  <div style="margin-top: auto; display: flex; flex-direction: column; gap: 10px">
+    <button type="button" style="min-height: 50px; border: none; border-radius: 4px; background: #1C1D1A; font-family: 'Schibsted Grotesk', sans-serif; font-size: 15px; font-weight: 600; color: #F7F7F4; cursor: pointer">Continue</button>
+    <div style="text-align: center; font-size: 12.5px; line-height: 1.4; color: #5E615A">Your phone asks next. You can change this any time in Settings.</div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { picked: 'always' };
+  }
+  renderVals() {
+    var options = [
+      { id: 'always', title: 'Always', body: 'The Action button and widget can save a point while your phone stays in your pocket. Still only when you press something.' },
+      { id: 'while', title: 'While using', body: 'Points when Cairn is open. Captures from a locked phone may have no location.' },
+      { id: 'off', title: 'Off', body: 'No points. Your journal still works, and routes can come from GPX imports.' }
+    ];
+    var self = this;
+    return {
+      options: options.map(function (o) {
+        return {
+          id: o.id,
+          title: o.title,
+          body: o.body,
+          selected: self.state.picked === o.id,
+          unselected: self.state.picked !== o.id,
+          pick: function () { self.setState({ picked: o.id }); }
+        };
+      })
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Cover face options</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;family=Schibsted+Grotesk:wght@400;500;600&amp;family=Martian+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 1200px; height: 1100px; box-sizing: border-box; padding: 48px; background: #F7F7F4; color: #1C1D1A; font-family: 'Schibsted Grotesk', 'Helvetica Neue', Arial, sans-serif; display: flex; flex-direction: column; gap: 30px">
+  <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 32px">
+    <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #8A6A45">Covers face out · what goes on the cover</div>
+    <div style="font-family: 'Newsreader', Georgia, serif; font-size: 16px; color: #5E615A">Six ways to fill the face. Covers at the size they would be on the Shelf screen.</div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px">
+
+    <div style="display: flex; flex-direction: column; gap: 14px; padding: 20px; border: 1px solid #D9DAD3; border-radius: 6px">
+      <div style="font-size: 15px; font-weight: 600">A · Title and year</div>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px 10px; min-height: 300px; align-content: start">
+        <sc-for list="{{books}}" as="item" hint-placeholder-count="6">
+          <div style="position: relative; width: 80px; height: 108px; overflow: hidden; border-radius: 2px 5px 5px 2px; background: {{item.color}}; box-shadow: inset 6px 0 0 rgba(0,0,0,0.18), 0 2px 5px rgba(28,29,26,0.16)">
+            <div style="position: absolute; top: 0; bottom: 0; right: 10px; width: 3px; background: rgba(0,0,0,0.32)"></div>
+            <div style="position: absolute; left: 13px; top: 12px; right: 16px; font-family: 'Newsreader', Georgia, serif; font-size: 12.5px; line-height: 1.15; white-space: pre-line; color: {{item.ink}}">{{item.short}}</div>
+            <div style="position: absolute; left: 13px; bottom: 10px; font-family: 'Martian Mono', monospace; font-size: 7.5px; color: {{item.ink}}">{{item.year}}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="font-family: 'Newsreader', Georgia, serif; font-size: 14px; line-height: 1.4; color: #3E403B">The name in the writing serif, the year small at the bottom, like the current notebook's cover in miniature.</div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 14px; padding: 20px; border: 1px solid #D9DAD3; border-radius: 6px">
+      <div style="font-size: 15px; font-weight: 600">B · Pressed mark</div>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px 10px; min-height: 300px; align-content: start">
+        <sc-for list="{{books}}" as="item" hint-placeholder-count="6">
+          <div style="display: flex; flex-direction: column; gap: 5px">
+            <div style="position: relative; width: 80px; height: 108px; overflow: hidden; border-radius: 2px 5px 5px 2px; background: {{item.color}}; box-shadow: inset 6px 0 0 rgba(0,0,0,0.18), 0 2px 5px rgba(28,29,26,0.16)">
+              <div style="position: absolute; top: 0; bottom: 0; right: 10px; width: 3px; background: rgba(0,0,0,0.32)"></div>
+              <svg viewBox="0 0 100 100" aria-hidden="true" style="position: absolute; left: 12px; top: 32px; width: 48px; height: 48px; fill: none; stroke: rgba(0,0,0,0.32); stroke-width: 3.4; stroke-linejoin: round; stroke-linecap: round"><path d="M4 76L28 56L40 64L58 42L74 58L96 47"></path><rect x="48" y="35" width="20" height="6" rx="3"></rect><rect x="51" y="27" width="14" height="6" rx="3"></rect><rect x="54" y="19" width="8" height="6" rx="3"></rect></svg>
+            </div>
+            <span style="font-size: 11.5px; font-weight: 600">{{item.name}}</span>
+            <span style="font-family: 'Martian Mono', monospace; font-size: 9px; color: #5E615A">{{item.year}}</span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="font-family: 'Newsreader', Georgia, serif; font-size: 14px; line-height: 1.4; color: #3E403B">The ridge cairn pressed into every cover, like a maker's mark. Names stay underneath.</div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 14px; padding: 20px; border: 1px solid #D9DAD3; border-radius: 6px">
+      <div style="font-size: 15px; font-weight: 600">C · The route itself</div>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px 10px; min-height: 300px; align-content: start">
+        <sc-for list="{{books}}" as="item" hint-placeholder-count="6">
+          <div style="display: flex; flex-direction: column; gap: 5px">
+            <div style="position: relative; width: 80px; height: 108px; overflow: hidden; border-radius: 2px 5px 5px 2px; background: {{item.color}}; box-shadow: inset 6px 0 0 rgba(0,0,0,0.18), 0 2px 5px rgba(28,29,26,0.16)">
+              <div style="position: absolute; top: 0; bottom: 0; right: 10px; width: 3px; background: rgba(0,0,0,0.32)"></div>
+              <svg viewBox="0 0 80 108" aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 80px; height: 108px; fill: none; stroke: {{item.trace}}; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round"><path d="{{item.route}}"></path><path d="{{item.dot}}" style="stroke-width: 4"></path></svg>
+            </div>
+            <span style="font-size: 11.5px; font-weight: 600">{{item.name}}</span>
+            <span style="font-family: 'Martian Mono', monospace; font-size: 9px; color: #5E615A">{{item.year}}</span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="font-family: 'Newsreader', Georgia, serif; font-size: 14px; line-height: 1.4; color: #3E403B">Each trip's own route traced on its cover (the Wonderland is a loop); yearly journals collect the year's short hikes. No two covers alike.</div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 14px; padding: 20px; border: 1px solid #D9DAD3; border-radius: 6px">
+      <div style="font-size: 15px; font-weight: 600">D · Paper label</div>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px 10px; min-height: 300px; align-content: start">
+        <sc-for list="{{books}}" as="item" hint-placeholder-count="6">
+          <div style="position: relative; width: 80px; height: 108px; overflow: hidden; border-radius: 2px 5px 5px 2px; background: {{item.color}}; box-shadow: inset 6px 0 0 rgba(0,0,0,0.18), 0 2px 5px rgba(28,29,26,0.16)">
+            <div style="position: absolute; top: 0; bottom: 0; right: 10px; width: 3px; background: rgba(0,0,0,0.32)"></div>
+            <div style="position: absolute; left: 11px; right: 18px; top: 18px; padding: 5px 6px 6px; display: flex; flex-direction: column; gap: 3px; background: #F4F1E8; border: 1px solid rgba(0,0,0,0.14)">
+              <span style="font-family: 'Newsreader', Georgia, serif; font-size: 10.5px; line-height: 1.15; white-space: pre-line; color: #1C1D1A">{{item.short}}</span>
+              <span style="font-family: 'Martian Mono', monospace; font-size: 7px; color: #5E615A">{{item.year}}</span>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="font-family: 'Newsreader', Georgia, serif; font-size: 14px; line-height: 1.4; color: #3E403B">A paper label on the cover with the name written on it, the way field notebooks are labelled.</div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 14px; padding: 20px; border: 1px solid #D9DAD3; border-radius: 6px">
+      <div style="font-size: 15px; font-weight: 600">E · A favourite photo</div>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px 10px; min-height: 300px; align-content: start">
+        <sc-for list="{{books}}" as="item" hint-placeholder-count="6">
+          <div style="display: flex; flex-direction: column; gap: 5px">
+            <div style="position: relative; width: 80px; height: 108px; overflow: hidden; border-radius: 2px 5px 5px 2px; background: {{item.color}}; box-shadow: inset 6px 0 0 rgba(0,0,0,0.18), 0 2px 5px rgba(28,29,26,0.16)">
+              <div style="position: absolute; top: 0; bottom: 0; right: 10px; width: 3px; background: rgba(0,0,0,0.32)"></div>
+              <div style="position: absolute; left: 12px; top: 24px; width: 46px; padding: 3px 3px 9px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(0,0,0,0.28); transform: rotate({{item.tilt}}deg)">
+                <div style="height: 34px; background: {{item.photo}}"></div>
+                <div style="position: absolute; top: -4px; left: 13px; width: 22px; height: 8px; background: rgba(222, 208, 170, 0.85); transform: rotate(-4deg)"></div>
+              </div>
+            </div>
+            <span style="font-size: 11.5px; font-weight: 600">{{item.name}}</span>
+            <span style="font-family: 'Martian Mono', monospace; font-size: 9px; color: #5E615A">{{item.year}}</span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="font-family: 'Newsreader', Georgia, serif; font-size: 14px; line-height: 1.4; color: #3E403B">A small print of one photo taped to the front. The person picks it, or Cairn suggests one from the trip.</div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 14px; padding: 20px; border: 1px solid #D9DAD3; border-radius: 6px">
+      <div style="font-size: 15px; font-weight: 600">F · Route and title</div>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px 10px; min-height: 300px; align-content: start">
+        <sc-for list="{{books}}" as="item" hint-placeholder-count="6">
+          <div style="position: relative; width: 80px; height: 108px; overflow: hidden; border-radius: 2px 5px 5px 2px; background: {{item.color}}; box-shadow: inset 6px 0 0 rgba(0,0,0,0.18), 0 2px 5px rgba(28,29,26,0.16)">
+            <div style="position: absolute; top: 0; bottom: 0; right: 10px; width: 3px; background: rgba(0,0,0,0.32)"></div>
+            <svg viewBox="0 0 80 108" aria-hidden="true" style="position: absolute; left: 6px; top: 4px; width: 56px; height: 72px; fill: none; stroke: {{item.trace}}; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="{{item.route}}"></path><path d="{{item.dot}}" style="stroke-width: 5"></path></svg>
+            <div style="position: absolute; left: 12px; right: 16px; bottom: 9px; font-family: 'Newsreader', Georgia, serif; font-size: 9.5px; line-height: 1.15; white-space: pre-line; color: {{item.ink}}">{{item.short}}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="font-family: 'Newsreader', Georgia, serif; font-size: 14px; line-height: 1.4; color: #3E403B">C and A together: the route on top, a small title at the bottom. Readable without tapping, and every cover is unique.</div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1200,"height":1100}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      books: [
+        { name: 'John Muir Trail', short: 'John Muir\nTrail', year: '2025', color: '#46525C', ink: '#EEF0EC', trace: 'rgba(238,240,236,0.8)', route: 'M52 16C47 24 55 31 47 39S51 53 43 60S47 73 37 80S35 90 28 95', dot: 'M52 16h0', photo: '#8FA0A8', tilt: -3 },
+        { name: 'Day hikes', short: 'Day hikes', year: '2025', color: '#B59A6E', ink: '#2A2418', trace: 'rgba(42,36,24,0.6)', route: 'M16 30c4-3 8 2 12-1M44 22c3 4 7 2 10 6M22 56c5 2 6 8 11 8M48 48c-2 6 4 9 2 14M28 82c4-4 9-1 12-5', dot: 'M16 30h0M44 22h0M22 56h0M48 48h0M28 82h0', photo: '#A9A18A', tilt: 2 },
+        { name: 'Wonderland Trail', short: 'Wonderland\nTrail', year: '2024', color: '#A2492B', ink: '#F6EDE8', trace: 'rgba(246,237,232,0.8)', route: 'M40 32C54 30 62 43 60 55S52 77 39 76S19 68 20 55S27 33 40 32Z', dot: 'M40 32h0', photo: '#9BA7A0', tilt: 3 },
+        { name: 'Day hikes', short: 'Day hikes', year: '2024', color: '#C49A2C', ink: '#2A2418', trace: 'rgba(42,36,24,0.6)', route: 'M20 24c3 5 8 3 11 7M46 34c5-2 7 3 11 1M18 60c2 5 7 5 9 10M44 66c4 0 6 6 11 5M30 88c3-3 7 0 10-3', dot: 'M20 24h0M46 34h0M18 60h0M44 66h0M30 88h0', photo: '#B0A486', tilt: -2 },
+        { name: 'Lost Coast', short: 'Lost\nCoast', year: '2023', color: '#3F5A47', ink: '#EEF2EE', trace: 'rgba(238,242,238,0.8)', route: 'M30 14C26 27 35 35 28 46S33 62 26 72S31 86 24 95', dot: 'M30 14h0', photo: '#93A3AE', tilt: 2 },
+        { name: 'Day hikes', short: 'Day hikes', year: '2023', color: '#5D6770', ink: '#EEF0F2', trace: 'rgba(238,240,242,0.75)', route: 'M18 28c4 2 6-3 11 0M42 20c2 5 7 5 9 9M24 52c4 4 9 1 12 5M46 58c-1 5 4 8 3 12M20 86c5-2 8 2 12-1', dot: 'M18 28h0M42 20h0M24 52h0M46 58h0M20 86h0', photo: '#A3ACA8', tilt: -3 }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

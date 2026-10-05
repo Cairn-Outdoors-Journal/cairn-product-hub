@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Cairn app icon</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600&amp;family=Martian+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 440px; height: 440px; box-sizing: border-box; padding: 32px; background: #F7F7F4; color: #1C1D1A; font-family: 'Schibsted Grotesk', 'Helvetica Neue', Arial, sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px">
+  <div style="width: 220px; height: 220px; border-radius: 49px; overflow: hidden; background: #1C1D1A; box-shadow: 0 2px 4px rgba(28,29,26,0.18), 0 16px 30px rgba(28,29,26,0.14)">
+    <svg viewBox="0 0 100 100" aria-hidden="true" style="display: block; width: 100%; height: 100%"><path d="M0 100V76L28 56L40 64L58 42L74 58L100 47V100Z" style="fill: #3A464F"></path><path d="M0 76L28 56L40 64L58 42L74 58L100 47" style="fill: none; stroke: #F7F7F4; stroke-width: 2.8; stroke-linejoin: round; stroke-linecap: round"></path><rect x="48" y="35" width="20" height="6" rx="3" style="fill: #F7F7F4"></rect><rect x="51" y="27" width="14" height="6" rx="3" style="fill: #F7F7F4"></rect><rect x="54" y="19" width="8" height="6" rx="3" style="fill: #E2531B"></rect><rect x="0" y="0" width="10" height="100" style="fill: rgba(0,0,0,0.38)"></rect><path d="M10 0V100" style="stroke: rgba(247,247,244,0.14); stroke-width: 0.8"></path><path d="{{ribbon}}" style="fill: #E2531B"></path></svg>
+  </div>
+  <div style="display: flex; align-items: flex-end; gap: 18px">
+    <div style="width: 60px; height: 60px; border-radius: 14px; overflow: hidden; background: #1C1D1A">
+      <svg viewBox="0 0 100 100" aria-hidden="true" style="display: block; width: 100%; height: 100%"><path d="M0 100V76L28 56L40 64L58 42L74 58L100 47V100Z" style="fill: #3A464F"></path><path d="M0 76L28 56L40 64L58 42L74 58L100 47" style="fill: none; stroke: #F7F7F4; stroke-width: 3.4; stroke-linejoin: round; stroke-linecap: round"></path><rect x="48" y="35" width="20" height="6" rx="3" style="fill: #F7F7F4"></rect><rect x="51" y="27" width="14" height="6" rx="3" style="fill: #F7F7F4"></rect><rect x="54" y="19" width="8" height="6" rx="3" style="fill: #E2531B"></rect><rect x="0" y="0" width="10" height="100" style="fill: rgba(0,0,0,0.38)"></rect><path d="M10 0V100" style="stroke: rgba(247,247,244,0.14); stroke-width: 0.8"></path><path d="{{ribbon}}" style="fill: #E2531B"></path></svg>
+    </div>
+    <div style="width: 40px; height: 40px; border-radius: 9px; overflow: hidden; background: #1C1D1A">
+      <svg viewBox="0 0 100 100" aria-hidden="true" style="display: block; width: 100%; height: 100%"><path d="M0 100V76L28 56L40 64L58 42L74 58L100 47V100Z" style="fill: #3A464F"></path><path d="M0 76L28 56L40 64L58 42L74 58L100 47" style="fill: none; stroke: #F7F7F4; stroke-width: 4; stroke-linejoin: round; stroke-linecap: round"></path><rect x="48" y="35" width="20" height="6" rx="3" style="fill: #F7F7F4"></rect><rect x="51" y="27" width="14" height="6" rx="3" style="fill: #F7F7F4"></rect><rect x="54" y="19" width="8" height="6" rx="3" style="fill: #E2531B"></rect><rect x="0" y="0" width="10" height="100" style="fill: rgba(0,0,0,0.38)"></rect><path d="M10 0V100" style="stroke: rgba(247,247,244,0.14); stroke-width: 0.8"></path><path d="{{ribbon}}" style="fill: #E2531B"></path></svg>
+    </div>
+    <span style="font-family: 'Martian Mono', monospace; font-size: 9px; color: #5E615A; padding-bottom: 4px">60 · 40 PX</span>
+  </div>
+  <div style="font-size: 13px; color: #5E615A; text-align: center">A book spine, a ridge over filled ground, a cairn with an orange top stone, and today's ribbon.</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"ribbon":{"editor":"enum","options":["original","smaller","smallest"],"default":"smaller"},"$preview":{"width":440,"height":440}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var paths = {
+      original: 'M78 0H88V30L83 25.5L78 30Z',
+      smaller: 'M79.5 0H86.5V20L83 17L79.5 20Z',
+      smallest: 'M80 0H86V15L83 12.5L80 15Z'
+    };
+    return { ribbon: paths[this.props.ribbon] || paths.smaller };
+  }
+}
+</script>
+</body>
+</html>
