@@ -9,6 +9,7 @@ says what was decided, why, and what follows from it.
 | [0002](0002-stack.md) | Technology stack | Accepted |
 | [0003](0003-local-first-encrypted-storage.md) | Local-first journal with user-chosen, end-to-end encrypted storage | Accepted |
 | [0004](0004-location-points.md) | Location points with user-chosen permission levels | Accepted |
+| [0005](0005-visual-identity.md) | Visual identity, app icon and shelf | Accepted |
 
 ## Writing a new record
 

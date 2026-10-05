@@ -18,7 +18,7 @@ and the specs other repos implement. No app or server code lives here.
 | [ARCHITECTURE.md](ARCHITECTURE.md) | System diagram and what data crosses each boundary ([styled version](design/architecture.html)) |
 | [decisions/](decisions/) | Architecture decision records (ADRs) |
 | [specs/sync-format.md](specs/sync-format.md) | Sync and encryption format shared by the app and the API |
-| [design/](design/) | Design sources: architecture page, moodboard, icons, logo |
+| [design/](design/) | Design sources: [architecture page](design/architecture.html) and the [moodboard](design/moodboard/) |
 
 ## Repositories
 

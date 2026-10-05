@@ -45,10 +45,14 @@ actually leave my notebook at home."
 
 ### Bookshelf and notebooks
 
-- Each trip is a notebook on a shelf. The current one is face-out, and day hikes go into a notebook
-  for each year.
+- Each trip is a notebook on a shelf, and day hikes go into a notebook for each year. The current
+  notebook is shown large; the rest sit below as small covers facing out, each with the ridge cairn
+  pressed into it and its name and year underneath.
 - Notebooks have a cloth cover (waxed-canvas tan, forest, rust, slate, ochre). Over time the cover
   shows wear (v2).
+- **The cover colour can be changed at any time**, not only when the notebook is created: long-press a
+  notebook on the Shelf (or open its cover), choose Change cover, pick a cloth. Any wear carries over
+  to the new colour.
 - **The app opens to today's page** with a book-opening animation: the cover lifts and the pages
   riffle to the ribbon. The full animation plays on the first open of the day; after that it takes
   under a second.
