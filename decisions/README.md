@@ -12,6 +12,7 @@ says what was decided, why, and what follows from it.
 | [0005](0005-visual-identity.md) | Visual identity, app icon and shelf | Accepted |
 | [0006](0006-scaffolding-choices.md) | Scaffolding choices; Fly.io managed with flyctl | Accepted |
 | [0007](0007-terraform.md) | Terraform instead of OpenTofu | Accepted |
+| [0008](0008-page-composer.md) | Page composer: a custom editor that wraps text while typing | Accepted |
 
 ## Writing a new record
 
