@@ -33,7 +33,7 @@ they finish (Aug–Oct).
 - **Taped items:** photos with 2–3 print styles and 2–3 tape styles; writing wraps around them; sketch boxes.
 - **Back pocket:** text, voice transcribed on the phone, camera-roll suggestions. Can be switched off.
 - **Quick capture:** iOS widget and Action button; Android quick-settings tile.
-- **Location points:** Always / While using / Off; trust UX; terrain-data elevation.
+- **Location points:** Always / While using / Off on iOS, While using / Off on Android ([ADR 0009](decisions/0009-location-capture-results.md)); trust UX; terrain-data elevation.
 - **Look and feel:** headlamp, light and dark themes; Face ID lock; ribbon; Days and People tabs.
 - **Storage:**
   - device-only, and Cairn Cloud with end-to-end encryption;
@@ -83,6 +83,7 @@ weeks 2–3, before anything is built on top of it.
 - **New phone:** wipe the phone → restore from Cairn Cloud with the recovery key → every page,
   photo and location point is back.
 - **Export:** the PDF and the archive both open correctly.
-- **Location:** each permission level (Always, While using, Off) behaves as documented in
-  [ADR 0004](decisions/0004-location-points.md).
+- **Location:** each permission level the platform offers (iOS: Always, While using, Off; Android:
+  While using, Off) behaves as documented in [ADR 0004](decisions/0004-location-points.md) and
+  [ADR 0009](decisions/0009-location-capture-results.md).
 - **Real trip:** at least one real overnight trip with the app.

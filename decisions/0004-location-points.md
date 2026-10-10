@@ -1,6 +1,6 @@
 # 0004. Location points with user-chosen permission levels
 
-- **Status:** Accepted
+- **Status:** Accepted; Android permission levels amended by [0009](0009-location-capture-results.md)
 - **Date:** 2026-10-05
 
 ## Context
