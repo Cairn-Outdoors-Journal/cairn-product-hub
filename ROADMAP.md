@@ -33,7 +33,7 @@ they finish (Aug–Oct).
 - **Taped items:** photos with 2–3 print styles and 2–3 tape styles; writing wraps around them; sketch boxes.
 - **Back pocket:** text, voice transcribed on the phone, camera-roll suggestions. Can be switched off.
 - **Quick capture:** iOS widget and Action button; Android quick-settings tile.
-- **Location points:** Always / While using / Off; trust UX; terrain-data elevation.
+- **Location points:** Always / While using / Off on iOS, While using / Off on Android ([ADR 0009](decisions/0009-location-capture-results.md)); trust UX; terrain-data elevation.
 - **Look and feel:** headlamp, light and dark themes; Face ID lock; ribbon; Days and People tabs.
 - **Storage:**
   - device-only, and Cairn Cloud with end-to-end encryption;
