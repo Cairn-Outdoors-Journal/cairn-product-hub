@@ -83,6 +83,7 @@ weeks 2–3, before anything is built on top of it.
 - **New phone:** wipe the phone → restore from Cairn Cloud with the recovery key → every page,
   photo and location point is back.
 - **Export:** the PDF and the archive both open correctly.
-- **Location:** each permission level (Always, While using, Off) behaves as documented in
-  [ADR 0004](decisions/0004-location-points.md).
+- **Location:** each permission level the platform offers (iOS: Always, While using, Off; Android:
+  While using, Off) behaves as documented in [ADR 0004](decisions/0004-location-points.md) and
+  [ADR 0009](decisions/0009-location-capture-results.md).
 - **Real trip:** at least one real overnight trip with the app.

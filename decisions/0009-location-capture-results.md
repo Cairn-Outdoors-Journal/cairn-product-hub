@@ -41,8 +41,8 @@ written to a log with its trigger, permission level, app state, result and time 
 
 - **Offer only While using and Off.** Cairn never asks for "Allow all the time".
 - **A tile tap starts a short location foreground service** that takes one fix and stops. It
-  goes straight to the service, without trying a direct read first, since that never works in
-  the background.
+  goes straight to the service, without trying a direct read first, since at While using that
+  never returns a location from the background.
 - While the service runs, Android shows a notification for a few seconds. Its text is
   "Saving a point…".
 
@@ -61,6 +61,10 @@ written to a log with its trigger, permission level, app state, result and time 
 - **The explanation page differs by platform:** Android shows two choices, iOS shows three.
 - **A tile capture shows a brief notification.** Android requires it, and it is visible proof of
   what Cairn is doing, which fits ADR 0004's trust goals.
+- **That proof depends on a second permission.** From Android 13, notifications need the
+  `POST_NOTIFICATIONS` permission. If the user denies it, the service still runs and the fix is
+  still taken, but the notification shows only in the Task Manager, not the notification drawer.
+  Android's explanation page has to cover the notifications prompt, or Cairn decides not to ask.
 - **Still to check on real phones:**
   - that Android phone makers' battery savers don't block the foreground service;
   - everything on iOS listed above.

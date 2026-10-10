@@ -85,8 +85,9 @@ content the user chose to publish. Thin (`-->`) = metadata and service calls, no
 - **One writer per page.** Even on shared trips each person owns their own pages, so sync resolves
   conflicts with "last write wins" per record and needs no merge logic.
 - **Location points are journal content.** Cairn saves one location fix each time the user opens the
-  app or captures something, never continuously. The user chooses Always (so the Action button and
-  widget work while the phone is locked), While using, or Off. Points are encrypted like pages, shown
+  app or captures something, never continuously. On iPhone the user chooses Always (so the Action
+  button and widget work while the phone is locked), While using, or Off; on Android, While using
+  or Off, since a tile tap gets a fix without Always (ADR 0009). Points are encrypted like pages, shown
   in the margin as they are saved, and can be deleted or paused. With location off, the journal still
   works and those points are simply missing.
 - **Weather and elevation are looked up by the phone.** Open-Meteo gets a rounded location plus the

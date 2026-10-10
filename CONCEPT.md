@@ -123,8 +123,9 @@ attached to the day. The pocket can be switched off.
 ### Location points
 
 - **One location fix each time the user opens Cairn or captures something.** Never continuous tracking.
-- **On by default,** with the user choosing **Always**, **While using** or **Off**
-  (see [ADR 0004](decisions/0004-location-points.md)).
+- **On by default,** with the user choosing **Always**, **While using** or **Off** on iPhone, and
+  **While using** or **Off** on Android (see [ADR 0004](decisions/0004-location-points.md) and
+  [ADR 0009](decisions/0009-location-capture-results.md)).
 - **What the points give you:**
   - a dotted route and per-day elevation without a GPX file;
   - pins on the route when a GPX file is imported;
