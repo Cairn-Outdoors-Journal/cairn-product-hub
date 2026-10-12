@@ -123,7 +123,7 @@ footer { color: var(--muted); font-size: .88rem; border-top: 1px solid var(--lin
 
         <rect class="box" x="44" y="224" width="372" height="64" rx="6"/>
         <text class="t" x="58" y="250">Local journal</text>
-        <text class="s" x="58" y="270">SQLite · photos · location points · the copy of record</text>
+        <text class="s" x="58" y="270">encrypted SQLite · photos · location points · copy of record</text>
 
         <rect class="box" x="44" y="338" width="372" height="64" rx="6"/>
         <text class="t" x="58" y="364">Sync engine</text>
@@ -281,7 +281,7 @@ footer { color: var(--muted); font-size: .88rem; border-top: 1px solid var(--lin
   <section>
     <h2>Decisions this diagram records</h2>
     <ul class="plain">
-      <li><strong>The phone is the source of truth.</strong> Every storage option is a copy of the local journal, so the app works the same with no account and no signal.</li>
+      <li><strong>The phone is the source of truth.</strong> Every storage option is a copy of the local journal, so the app works the same with no account and no signal. The journal is encrypted on the phone too, and only your recovery key can unlock a backed-up copy.</li>
       <li><strong>Blobs bypass the API.</strong> The phone uploads straight to R2 with short-lived signed URLs, so the API never handles journal bytes, encrypted or not.</li>
       <li><strong>One writer per page.</strong> Even on shared trips each person owns their own pages, so sync resolves conflicts with "last write wins" per record and needs no merge logic.</li>
       <li><strong>Location points are journal content.</strong> Cairn saves one location fix each time you open the app or capture something, never continuously. On iPhone you choose Always (so the Action button and widget work while the phone is locked), While using, or Off; on Android, While using or Off, since a tile tap gets a fix without Always. Points are encrypted like pages, shown in the margin as they are saved, and can be deleted or paused. With location off, the journal still works and those points are simply missing.</li>
