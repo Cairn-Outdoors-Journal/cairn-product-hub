@@ -1,6 +1,6 @@
 # 0003. Local-first journal with user-chosen, end-to-end encrypted storage
 
-- **Status:** Accepted
+- **Status:** Accepted; extended by [0010](0010-data-layer.md) (the copy on the phone is encrypted too)
 - **Date:** 2026-10-05
 
 ## Context
