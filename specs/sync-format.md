@@ -37,13 +37,19 @@ with test vectors that both repos run in CI.
 ```
 Recovery key (shown once, printed as a page)
   └── Account master key (AMK, 32 random bytes; Keychain / Keystore)
+        ├── derives ── local journal keys (database, media) on each phone
         └── wraps ── Notebook key (NK, 32 random bytes, one per notebook)
                        ├── encrypts packs, snapshots, media of that notebook
                        └── derives media-id key (keyed hash for content addressing)
 ```
 
-- **The AMK** is generated on the user's first device. The **recovery key** is the AMK encoded
-  for people to write down. The encoding is an open question.
+- **The AMK** is generated with the journal on the user's first device, whatever storage they
+  choose. The **recovery key** is the AMK written out for people: Crockford Base32, 56 characters
+  in 14 groups of four, holding the 32 key bytes and a 3-byte checksum (the first 3 bytes of a
+  16-byte BLAKE2b hash of `"cairn-recovery-v1"` followed by the key). See ADR 0010.
+- **The journal on the phone** is encrypted with keys derived from the AMK (context `"cairn_lc"`:
+  subkey 1 for the database, 2 for media), so the recovery key also unlocks a journal restored from
+  an OS backup.
 - **Each notebook has its own key (NK).** It is stored wrapped by the AMK at `k/{notebook_id}.key`.
   Per-notebook keys let a trip be shared later without exposing the rest of the journal.
 - **Subkeys** are derived with libsodium `crypto_kdf_derive_from_key` (context `"cairn_v1"`), never
@@ -153,8 +159,6 @@ sizes. It never receives keys or plaintext.
 
 ## Open questions
 
-- **Recovery key encoding:** a 24-word list vs grouped Base32 with a checksum. Which is easier to
-  write in a tent?
 - **Pack serialization:** JSON (easy to debug) vs CBOR (compact).
 - **Pack size and batching** when coming back online after weeks: one pack per change, or
   batching by time?
