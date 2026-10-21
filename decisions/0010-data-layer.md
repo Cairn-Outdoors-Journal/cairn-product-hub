@@ -67,7 +67,13 @@ The code is on the `feat/data-layer` branch of cairn-app (`lib/data/`).
 - **Ids are UUIDv7, generated on the phone.** Each record carries the hybrid logical clock stamp of
   its last change.
 - **Deletes leave tombstones.** There are no foreign keys, because packs from other devices can
-  arrive in any order.
+  arrive in any order. A save never overwrites a tombstone, so a stale copy, such as a late
+  autosave, can't undo a delete.
+- **The device id belongs to the install, not the journal.** It is stored in the journal but
+  replaced whenever a journal is unlocked with the recovery key. A transferred or restored copy
+  therefore never writes as the phone it came from, which may still be in use.
+- **The clock never stops writes.** A full counter carries into the next millisecond, so a phone
+  whose clock was once ahead keeps working until real time catches up.
 - **Every write also logs a change in the same transaction:** record type, id, stamp, upsert or
   delete, and the whole record. Sync will send the changes not yet packed.
 - **Deletes reach everything that depends on them.** Deleting a notebook deletes its pages, their

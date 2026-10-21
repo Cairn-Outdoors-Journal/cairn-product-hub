@@ -105,7 +105,10 @@ a/{account_id}/
 - **A pack** is a compressed, serialized list of changes, then encrypted. The serialization
   (JSON vs CBOR) is an open question.
 - **Clock:** a hybrid logical clock `(wall_ms, counter, device_id)`, so ordering stays correct when
-  phone clocks drift during weeks offline.
+  phone clocks drift during weeks offline. A full counter carries into `wall_ms` (+1 ms) rather
+  than failing.
+- **`device_id` identifies the install,** not the journal: a journal restored with the recovery key,
+  on a new phone or after a reset, gets a new one, so two phones never write under the same id.
 
 ### Resolving conflicts
 
@@ -154,7 +157,7 @@ sizes. It never receives keys or plaintext.
 | Envelope round-trip | Fixed key, nonce and path give the exact expected bytes |
 | Path binding | Decrypting with a different path fails |
 | Media id | Keyed hash of a fixed input under a fixed NK |
-| HLC ordering | Clock skew and equal timestamps break ties by device id |
+| HLC ordering | Clock skew, equal timestamps broken by device id, and a full counter carrying into the next millisecond |
 | Resolving conflicts | Concurrent upserts, upsert vs delete, and keeping the earlier version |
 
 ## Open questions
