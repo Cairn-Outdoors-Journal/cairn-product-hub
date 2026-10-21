@@ -86,6 +86,12 @@ The code is on the `feat/data-layer` branch of cairn-app (`lib/data/`).
 - **Losing the recovery key and the phone loses the journal.** That's the price of Apple and Google
   never being able to read it. Setup has to make keeping the recovery key feel important: a
   printable page, and a check that it was written down.
+- **"This device only" no longer means nothing leaves the phone** (as ADR 0003 put it). It means
+  Cairn sends nothing anywhere, while the phone's own backup includes the journal, encrypted. The
+  storage choice has to say so plainly.
+  - **Open question:** should that option let people keep the journal out of the phone's backup
+    too? Both platforms allow it (iOS can exclude the folder, Android has a no-backup folder), at
+    the cost of losing the journal on a reset.
 - **On Android with "This device only" storage, photos survive a reset only through Cairn Cloud,
   own cloud (v1.5) or an export.** The storage choice has to say so plainly.
 - **A restored journal opens on an unlock screen,** and pages whose photos didn't come back show a

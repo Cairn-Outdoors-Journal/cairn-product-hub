@@ -1,6 +1,8 @@
 # 0003. Local-first journal with user-chosen, end-to-end encrypted storage
 
-- **Status:** Accepted; extended by [0010](0010-data-layer.md) (the copy on the phone is encrypted too)
+- **Status:** Accepted; extended by [0010](0010-data-layer.md): the copy on the phone is encrypted
+  too, and the phone's own backup includes it, so "This device only" now means Cairn sends nothing
+  anywhere rather than nothing leaving the phone
 - **Date:** 2026-10-05
 
 ## Context
