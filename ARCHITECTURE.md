@@ -11,7 +11,7 @@ flowchart LR
   subgraph phone["Phone · cairn-app"]
     capture["Quick capture<br/>widget · Action button · quick tile"]
     ui["Journal UI (Flutter)<br/>pages · pocket · speech + sun/moon offline"]
-    store[("Local journal<br/>SQLite (drift) · photos · location points")]
+    store[("Local journal, encrypted<br/>SQLite (drift) · photos · location points")]
     sync["Sync engine<br/>change log → encrypt (XChaCha20-Poly1305)"]
     keep{"Where it's kept<br/>this device · Cairn Cloud · own cloud"}
     capture -->|pocket items| store
@@ -79,7 +79,8 @@ content the user chose to publish. Thin (`-->`) = metadata and service calls, no
 ## Decisions this diagram records
 
 - **The phone is the source of truth.** Every storage option is a copy of the local journal, so the
-  app works the same with no account and no signal.
+  app works the same with no account and no signal. The journal is encrypted on the phone too; a
+  backed-up copy opens only on the same iPhone or with the person's recovery key (ADR 0010).
 - **Blobs bypass the API.** The phone uploads straight to R2 with short-lived signed URLs, so the API
   never handles journal bytes, encrypted or not.
 - **One writer per page.** Even on shared trips each person owns their own pages, so sync resolves

@@ -37,13 +37,19 @@ with test vectors that both repos run in CI.
 ```
 Recovery key (shown once, printed as a page)
   └── Account master key (AMK, 32 random bytes; Keychain / Keystore)
+        ├── derives ── local journal keys (database, media) on each phone
         └── wraps ── Notebook key (NK, 32 random bytes, one per notebook)
                        ├── encrypts packs, snapshots, media of that notebook
                        └── derives media-id key (keyed hash for content addressing)
 ```
 
-- **The AMK** is generated on the user's first device. The **recovery key** is the AMK encoded
-  for people to write down. The encoding is an open question.
+- **The AMK** is generated with the journal on the user's first device, whatever storage they
+  choose. The **recovery key** is the AMK written out for people: Crockford Base32, 56 characters
+  in 14 groups of four, holding the 32 key bytes and a 3-byte checksum (the first 3 bytes of a
+  16-byte BLAKE2b hash of `"cairn-recovery-v1"` followed by the key). See ADR 0010.
+- **The journal on the phone** is encrypted with keys derived from the AMK (context `"cairn_lc"`:
+  subkey 1 for the database, 2 for media), so the recovery key also unlocks a journal restored from
+  an OS backup.
 - **Each notebook has its own key (NK).** It is stored wrapped by the AMK at `k/{notebook_id}.key`.
   Per-notebook keys let a trip be shared later without exposing the rest of the journal.
 - **Subkeys** are derived with libsodium `crypto_kdf_derive_from_key` (context `"cairn_v1"`), never
@@ -99,7 +105,10 @@ a/{account_id}/
 - **A pack** is a compressed, serialized list of changes, then encrypted. The serialization
   (JSON vs CBOR) is an open question.
 - **Clock:** a hybrid logical clock `(wall_ms, counter, device_id)`, so ordering stays correct when
-  phone clocks drift during weeks offline.
+  phone clocks drift during weeks offline. A full counter carries into `wall_ms` (+1 ms) rather
+  than failing.
+- **`device_id` identifies the install,** not the journal: a journal restored with the recovery key,
+  on a new phone or after a reset, gets a new one, so two phones never write under the same id.
 
 ### Resolving conflicts
 
@@ -148,13 +157,11 @@ sizes. It never receives keys or plaintext.
 | Envelope round-trip | Fixed key, nonce and path give the exact expected bytes |
 | Path binding | Decrypting with a different path fails |
 | Media id | Keyed hash of a fixed input under a fixed NK |
-| HLC ordering | Clock skew and equal timestamps break ties by device id |
+| HLC ordering | Clock skew, equal timestamps broken by device id, and a full counter carrying into the next millisecond |
 | Resolving conflicts | Concurrent upserts, upsert vs delete, and keeping the earlier version |
 
 ## Open questions
 
-- **Recovery key encoding:** a 24-word list vs grouped Base32 with a checksum. Which is easier to
-  write in a tent?
 - **Pack serialization:** JSON (easy to debug) vs CBOR (compact).
 - **Pack size and batching** when coming back online after weeks: one pack per change, or
   batching by time?
