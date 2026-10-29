@@ -46,8 +46,9 @@ Account master key (AMK, 32 random bytes; Keychain / Keystore on each phone)
 
 - **The AMK** is generated with the journal on the user's first device, whatever storage they
   choose.
-- **Synced keychain:** on iOS the AMK is a synchronizable Keychain item (iCloud Keychain); on
-  Android a copy is kept in Block Store, backed up only when Google can encrypt it end to end.
+- **Synced keychain:** each phone works with a this-device-only copy and keeps a second copy that
+  travels: on iOS a synchronizable Keychain item (iCloud Keychain), written only when missing; on
+  Android in Block Store, backed up only when Google can encrypt it end to end.
   Both are end-to-end encrypted by the platform; a new phone of the same kind gets the AMK.
 - **Passkey (with Cairn Cloud):** the WebAuthn PRF extension, evaluated with the fixed salt
   `"cairn-amk-v1"`, gives a 32-byte secret that never leaves the person's devices. A wrapping key

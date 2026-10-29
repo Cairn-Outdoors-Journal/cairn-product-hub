@@ -21,11 +21,15 @@ The key reaches a new phone in up to three ways.
 
 1. **Synced keychain, by default for everyone.** These are the phone makers' end-to-end encrypted
    key stores, protected by the phone's passcode; neither the maker nor Cairn can read them.
-   - **iOS:** the key is a synchronizable Keychain item (iCloud Keychain), readable after the
-     first unlock. A new iPhone signed in to the same Apple account has it.
+   - **iOS:** a copy is a synchronizable Keychain item (iCloud Keychain), readable after the
+     first unlock, next to the this-device-only item the app works with. A new iPhone signed in
+     to the same Apple account has it. The copy is shared live between the person's devices, so
+     it is only written when missing: a second iPhone that started a journal before the copy
+     arrived keeps its own key instead of replacing the first phone's.
    - **Android:** a copy goes into Block Store, saved to Google's cloud only when Google can
      encrypt it end to end, which needs a screen lock. The Keystore copy stays the one the app
      works with. A new Android phone restored from the same Google account has it.
+   - Each phone reads its own key first and takes the copy only when it has none.
    - This covers moving between phones of the same kind. It doesn't cover iPhone to Android or
      back.
 2. **Passkey, for Cairn Cloud users.**
