@@ -14,7 +14,8 @@ says what was decided, why, and what follows from it.
 | [0007](0007-terraform.md) | Terraform instead of OpenTofu | Accepted |
 | [0008](0008-page-composer.md) | Page composer: a custom editor that wraps text while typing | Accepted |
 | [0009](0009-location-capture-results.md) | Location capture: no "Always" on Android; iOS confirmed on a real iPhone later | Accepted |
-| [0010](0010-data-layer.md) | Data layer: an encrypted journal on the phone; Android 12 minimum | Accepted |
+| [0010](0010-data-layer.md) | Data layer: an encrypted journal on the phone; Android 12 minimum | Accepted; amended by 0011, 0012 |
+| [0011](0011-no-phone-backups.md) | Phone backups never carry the journal | Accepted |
 
 ## Writing a new record
 

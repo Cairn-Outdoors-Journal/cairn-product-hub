@@ -1,6 +1,7 @@
 # 0010. Data layer: an encrypted journal on the phone
 
-- **Status:** Accepted
+- **Status:** Accepted; backups amended by [0011](0011-no-phone-backups.md), key travel by
+  [0012](0012-key-on-a-new-phone.md)
 - **Date:** 2026-10-12
 - **Extends:** [ADR 0003](0003-local-first-encrypted-storage.md), which encrypts everything that
   leaves the phone but left the copy on the phone open
