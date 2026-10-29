@@ -37,6 +37,10 @@ they finish (Aug–Oct).
 - **Look and feel:** headlamp, light and dark themes; Face ID lock; ribbon; Days and People tabs.
 - **Storage:**
   - device-only, and Cairn Cloud with end-to-end encryption;
+  - a local backup file that imports on any phone, iPhone or Android (the only backup for
+    device-only journals, which stay out of phone backups: ADR 0011);
+  - the key reaches a new phone through the synced keychain, a passkey or the recovery key
+    (ADR 0012);
   - "safe as of…" backup status;
   - PDF and archive export.
 - **Sharing:** a page as an image, with locations hidden by default.
@@ -80,8 +84,10 @@ weeks 2–3, before anything is built on top of it.
 ## v1 release checks
 
 - **Airplane mode:** 5 days of daily entries with no signal → reconnect → sync completes.
-- **New phone:** wipe the phone → restore from Cairn Cloud with the recovery key → every page,
-  photo and location point is back.
+- **New phone:**
+  - wipe the phone, then restore from Cairn Cloud with the key from the synced keychain and, on a
+    phone of the other kind, from a passkey: every page, photo and location point is back;
+  - the same from a local backup file, across iPhone and Android.
 - **Export:** the PDF and the archive both open correctly.
 - **Location:** each permission level the platform offers (iOS: Always, While using, Off; Android:
   While using, Off) behaves as documented in [ADR 0004](decisions/0004-location-points.md) and
