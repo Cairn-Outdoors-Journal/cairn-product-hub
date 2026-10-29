@@ -70,7 +70,7 @@
       "h": 844,
       "is_interactive": true,
       "radius": 28,
-      "title": "Location points setup",
+      "title": "Location setup, iPhone",
       "w": 390,
       "x": 1410,
       "y": 0
@@ -140,6 +140,15 @@
       "w": 390,
       "x": 2870,
       "y": 0
+    },
+    "LocationAndroid.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 28,
+      "title": "Location setup, Android",
+      "w": 390,
+      "x": 3340,
+      "y": 0
     }
   },
   "createdOnFiles": {
@@ -192,6 +201,7 @@
     "DayPage.dc.html",
     "Headlamp.dc.html",
     "Location.dc.html",
+    "LocationAndroid.dc.html",
     "ShelfEmpty.dc.html",
     "CoverColour.dc.html",
     "AppIcon.dc.html",
