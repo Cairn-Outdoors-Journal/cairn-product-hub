@@ -122,6 +122,24 @@
       "x": 1280,
       "y": 2060,
       "page": "scrapped"
+    },
+    "ShelfEmpty.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 28,
+      "title": "Empty shelf",
+      "w": 390,
+      "x": 2400,
+      "y": 0
+    },
+    "CoverColour.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 28,
+      "title": "Cover colour",
+      "w": 390,
+      "x": 2870,
+      "y": 0
     }
   },
   "createdOnFiles": {
@@ -144,7 +162,7 @@
     },
     "screens": {
       "kind": "title1",
-      "maxW": 2320,
+      "maxW": 3730,
       "text": "Screens",
       "w": 240,
       "x": 0,
@@ -164,7 +182,7 @@
       "w": 360,
       "maxH": 300,
       "fill": "orange",
-      "text": "Design note: covers can change.\n\nPeople can change a notebook's cover colour at any time, not just when they create it. Long-press a notebook on the Shelf (or open its cover) \u2192 Change cover \u2192 pick a cloth. Any wear the cover has picked up carries over to the new colour."
+      "text": "Design note: covers can change.\n\nPeople can change a notebook's cover colour at any time, not just when they create it. Long-press a notebook on the Shelf (or open its cover) → Change cover → pick one of six cloths, or any colour from the colour wheel. Any wear the cover has picked up carries over to the new colour."
     }
   },
   "order": [
@@ -174,6 +192,8 @@
     "DayPage.dc.html",
     "Headlamp.dc.html",
     "Location.dc.html",
+    "ShelfEmpty.dc.html",
+    "CoverColour.dc.html",
     "AppIcon.dc.html",
     "AppIconOptions.dc.html",
     "SpringOptions.dc.html",
