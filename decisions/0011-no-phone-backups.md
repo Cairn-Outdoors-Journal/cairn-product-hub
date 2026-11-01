@@ -1,6 +1,7 @@
 # 0011. Phone backups never carry the journal
 
-- **Status:** Accepted
+- **Status:** Accepted; built on cairn-app branch `fix/backups-and-key-sync` and parked until
+  sync and restore (weeks 11–13, see the roadmap)
 - **Date:** 2026-10-29
 - **Amends:** [ADR 0010](0010-data-layer.md), "OS backups include the journal"
 
