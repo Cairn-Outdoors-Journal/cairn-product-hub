@@ -16,7 +16,8 @@ with test vectors that both repos run in CI.
   read on the user's own devices. Storage (R2, iCloud, Google Drive) holds encrypted objects only.
 - **The same objects work with any storage provider.** Moving between providers copies objects
   without re-encrypting them.
-- **Restore on a new phone** needs only the recovery key.
+- **Restore on a new phone** needs only the account master key, which reaches the new phone through
+  the synced keychain, a passkey or the recovery key (ADR 0012).
 - **Weeks offline then one sync** must be fast and safe.
 
 **Non-goals for v1:** real-time collaboration on one page, server-side search, key rotation.
@@ -35,8 +36,8 @@ with test vectors that both repos run in CI.
 ## Keys
 
 ```
-Recovery key (shown once, printed as a page)
-  └── Account master key (AMK, 32 random bytes; Keychain / Keystore)
+Account master key (AMK, 32 random bytes; Keychain / Keystore on each phone)
+  ├── reaches a new phone via ── synced keychain · passkey · recovery key (ADR 0012)
         ├── derives ── local journal keys (database, media) on each phone
         └── wraps ── Notebook key (NK, 32 random bytes, one per notebook)
                        ├── encrypts packs, snapshots, media of that notebook
@@ -44,12 +45,23 @@ Recovery key (shown once, printed as a page)
 ```
 
 - **The AMK** is generated with the journal on the user's first device, whatever storage they
-  choose. The **recovery key** is the AMK written out for people: Crockford Base32, 56 characters
+  choose.
+- **Synced keychain:** each phone works with a this-device-only copy and keeps a second copy that
+  travels: on iOS a synchronizable Keychain item (iCloud Keychain), written only when missing; on
+  Android in Block Store, backed up only when Google can encrypt it end to end.
+  Both are end-to-end encrypted by the platform; a new phone of the same kind gets the AMK.
+- **Passkey (with Cairn Cloud):** the WebAuthn PRF extension, evaluated with the fixed salt
+  `"cairn-amk-v1"`, gives a 32-byte secret that never leaves the person's devices. A wrapping key
+  is derived from it (`crypto_kdf_derive_from_key`, context `"cairn_pk"`, subkey 1), and the AMK
+  is stored wrapped with it at `k/amk/{credential_id}.key` (envelope kind 3, key id zeros). Any
+  phone where the passkey is available can unwrap the AMK. Local backup files carry the same
+  wrapped copy.
+- The **recovery key**, an optional fallback, is the AMK written out for people: Crockford Base32, 56 characters
   in 14 groups of four, holding the 32 key bytes and a 3-byte checksum (the first 3 bytes of a
   16-byte BLAKE2b hash of `"cairn-recovery-v1"` followed by the key). See ADR 0010.
 - **The journal on the phone** is encrypted with keys derived from the AMK (context `"cairn_lc"`:
-  subkey 1 for the database, 2 for media), so the recovery key also unlocks a journal restored from
-  an OS backup.
+  subkey 1 for the database, 2 for media), so whatever brings the AMK to a phone also opens a
+  local backup file restored there. Phone backups never carry the journal (ADR 0011).
 - **Each notebook has its own key (NK).** It is stored wrapped by the AMK at `k/{notebook_id}.key`.
   Per-notebook keys let a trip be shared later without exposing the rest of the journal.
 - **Subkeys** are derived with libsodium `crypto_kdf_derive_from_key` (context `"cairn_v1"`), never
@@ -84,6 +96,7 @@ reveal nothing about content or creation time.
 ```
 a/{account_id}/
   k/{notebook_id}.key                         wrapped notebook key
+  k/amk/{credential_id}.key                   AMK wrapped by a passkey (ADR 0012)
   n/{notebook_id}/
     p/{device_id}/{seq:010}.pack              change packs, per device, gap-free sequence
     s/{snapshot_id}.snap                      snapshots
@@ -140,7 +153,8 @@ Packs never reference media that hasn't been uploaded yet.
 
 **Restore on a new device:**
 
-1. Enter the recovery key → AMK.
+1. Get the AMK: from the synced keychain, by signing in with a passkey and unwrapping
+   `k/amk/{credential_id}.key`, or from the recovery key.
 2. List the notebook keys.
 3. For each notebook, load the newest snapshot, then the packs after it.
 

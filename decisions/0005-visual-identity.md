@@ -1,6 +1,6 @@
 # 0005. Visual identity, app icon and shelf
 
-- **Status:** Accepted
+- **Status:** Accepted; cover colours and shelf details amended by [0013](0013-shelf-and-covers.md)
 - **Date:** 2026-10-05
 
 ## Context

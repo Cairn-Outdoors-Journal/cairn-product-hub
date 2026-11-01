@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Empty shelf</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;family=Schibsted+Grotesk:wght@400;500;600&amp;family=Martian+Mono:wght@400;500&amp;display=swap">
+<style>
+html,body{margin:0;overflow:hidden}
+a{color:#1C1D1A}a:hover{color:#B8430F}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; overflow: clip; background: #F7F7F4; color: #1C1D1A; font-family: 'Schibsted Grotesk', 'Helvetica Neue', Arial, sans-serif; display: flex; flex-direction: column">
+
+  <div style="height: 58px; flex: none; display: flex; align-items: center; padding: 0 16px 0 20px">
+    <div style="width: 28px; height: 28px; flex: none; border-radius: 7px; overflow: hidden; background: #1C1D1A"><svg viewBox="0 0 100 100" aria-hidden="true" style="display: block; width: 100%; height: 100%"><path d="M0 100V76L28 56L40 64L58 42L74 58L100 47V100Z" style="fill: #3A464F"></path><path d="M0 76L28 56L40 64L58 42L74 58L100 47" style="fill: none; stroke: #F7F7F4; stroke-width: 4.5; stroke-linejoin: round; stroke-linecap: round"></path><rect x="48" y="35" width="20" height="6" rx="3" style="fill: #F7F7F4"></rect><rect x="51" y="27" width="14" height="6" rx="3" style="fill: #F7F7F4"></rect><rect x="54" y="19" width="8" height="6" rx="3" style="fill: #E2531B"></rect><rect x="0" y="0" width="11" height="100" style="fill: rgba(0,0,0,0.38)"></rect><path d="M79.5 0H86.5V20L83 17L79.5 20Z" style="fill: #E2531B"></path></svg></div>
+  </div>
+
+  <div style="flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 14px; padding: 18px 24px 0">
+    <h1 style="margin: 0; font-family: 'Newsreader', Georgia, serif; font-size: 32px; font-weight: 500">Shelf</h1>
+
+    <div style="display: flex; align-items: center; gap: 8px; font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #8A6A45">On the trail<span style="flex: 1; height: 1px; background: #D9DAD3"></span></div>
+
+    <button type="button" aria-label="Start your first notebook" style="align-self: center; position: relative; width: 186px; height: 252px; margin-bottom: 4px; box-sizing: border-box; padding: 0; border: 1.5px dashed #C9CBC3; border-radius: 3px 8px 8px 3px; background: none; text-align: left; font-family: inherit; cursor: pointer">
+      <span style="position: absolute; left: 24px; right: 24px; top: 28px; font-family: 'Newsreader', Georgia, serif; font-size: 22px; line-height: 1.15; color: #5E615A">Start your first notebook</span>
+      <svg viewBox="0 0 100 100" aria-hidden="true" style="position: absolute; left: 24px; bottom: 46px; width: 52px; height: 52px; fill: none; stroke: #C9CBC3; stroke-width: 3; stroke-linejoin: round; stroke-linecap: round"><path d="M4 76L28 56L40 64L58 42L74 58L96 47"></path><rect x="48" y="35" width="20" height="6" rx="3"></rect><rect x="51" y="27" width="14" height="6" rx="3"></rect><rect x="54" y="19" width="8" height="6" rx="3"></rect></svg>
+      <span style="position: absolute; left: 24px; bottom: 22px; display: flex; align-items: center; gap: 4px; font-family: 'Martian Mono', monospace; font-size: 9px; color: #5E615A"><svg viewBox="0 0 24 24" aria-hidden="true" style="width: 12px; height: 12px; fill: none; stroke: #5E615A; stroke-width: 2; stroke-linecap: round"><path d="M12 5V19M5 12H19"></path></svg>TAP TO START</span>
+    </button>
+    <p style="margin: 0 0 8px; text-align: center; font-size: 13.5px; line-height: 1.45; color: #5E615A">A notebook can hold one trip, or a year of shorter hikes.</p>
+
+    <div style="display: flex; align-items: center; gap: 8px; font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #8A6A45">On the shelf<span style="flex: 1; height: 1px; background: #D9DAD3"></span></div>
+
+    <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px 10px">
+      <sc-for list="{{places}}" as="item" hint-placeholder-count="4">
+        <button type="button" aria-label="New notebook" style="display: flex; flex-direction: column; align-items: flex-start; gap: 7px; padding: 0; border: none; background: none; cursor: pointer">
+          <span style="position: relative; display: block; width: 72px; height: 97px; box-sizing: border-box; border: 1.5px dashed #C9CBC3; border-radius: 2px 5px 5px 2px">
+            <svg viewBox="0 0 100 100" aria-hidden="true" style="position: absolute; left: 10px; top: 28px; width: 43px; height: 43px; fill: none; stroke: #C9CBC3; stroke-width: 3.4; stroke-linejoin: round; stroke-linecap: round"><path d="M4 76L28 56L40 64L58 42L74 58L96 47"></path><rect x="48" y="35" width="20" height="6" rx="3"></rect><rect x="51" y="27" width="14" height="6" rx="3"></rect><rect x="54" y="19" width="8" height="6" rx="3"></rect></svg>
+          </span>
+          <span aria-hidden="true" style="width: 52px; height: 6px; border-radius: 3px; background: #E3E4DE"></span>
+          <span aria-hidden="true" style="width: 26px; height: 6px; border-radius: 3px; background: #E3E4DE"></span>
+        </button>
+      </sc-for>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { places: [1, 2, 3, 4] };
+  }
+}
+</script>
+</body>
+</html>
