@@ -149,6 +149,15 @@
       "w": 390,
       "x": 3340,
       "y": 0
+    },
+    "Days.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "radius": 28,
+      "title": "Days tab",
+      "w": 390,
+      "x": 3810,
+      "y": 0
     }
   },
   "createdOnFiles": {
@@ -171,7 +180,7 @@
     },
     "screens": {
       "kind": "title1",
-      "maxW": 3730,
+      "maxW": 4200,
       "text": "Screens",
       "w": 240,
       "x": 0,
@@ -192,6 +201,14 @@
       "maxH": 300,
       "fill": "orange",
       "text": "Design note: covers can change.\n\nPeople can change a notebook's cover colour at any time, not just when they create it. Long-press a notebook on the Shelf (or open its cover) → Change cover → pick one of six cloths, or any colour from the colour wheel. Any wear the cover has picked up carries over to the new colour."
+    },
+    "pages": {
+      "x": -440,
+      "y": 380,
+      "w": 360,
+      "maxH": 300,
+      "fill": "blue",
+      "text": "Design note: one page size.\n\nEvery page is a fixed 432 × 792 pt (6 × 11 in) on every phone, scaled to fit the screen, so a page that's full on one phone is full on all. Writing that runs past the bottom continues on the next page for the same day, under a CONTINUED header."
     }
   },
   "order": [
@@ -204,6 +221,7 @@
     "LocationAndroid.dc.html",
     "ShelfEmpty.dc.html",
     "CoverColour.dc.html",
+    "Days.dc.html",
     "AppIcon.dc.html",
     "AppIconOptions.dc.html",
     "SpringOptions.dc.html",
